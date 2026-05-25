@@ -392,9 +392,97 @@ footer{
     cursor: zoom-in !important;
   }
 
+
+  /* PASSWORD GATE */
+  .gate-overlay {
+    position: fixed;
+    inset: 0;
+    background: #f5f5f7;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .gate-box {
+    background: white;
+    border-radius: 24px;
+    padding: 48px 40px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.07);
+    text-align: center;
+    width: 100%;
+    max-width: 380px;
+    margin: 24px;
+  }
+  .gate-icon { font-size: 36px; margin-bottom: 16px; }
+  .gate-title { font-size: 22px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 8px; }
+  .gate-sub { font-size: 14px; color: #6e6e73; margin-bottom: 28px; }
+  .gate-input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid rgba(0,0,0,0.12);
+    border-radius: 12px;
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    text-align: center;
+    letter-spacing: .08em;
+    margin-bottom: 14px;
+    transition: border-color .2s;
+    background: #fafafa;
+  }
+  .gate-input:focus { border-color: #0071e3; background: white; }
+  .gate-btn {
+    width: 100%;
+    padding: 14px;
+    background: #0071e3;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .gate-btn:hover { background: #0077ed; }
+  .gate-error {
+    color: #ff3b30;
+    font-size: 13px;
+    margin-top: 10px;
+    display: none;
+  }
+
 </style>
 </head>
 <body>
+
+
+  <div class="gate-overlay" id="gate">
+    <div class="gate-box">
+      <div class="gate-icon">💎</div>
+      <div class="gate-title">Packaging Quote</div>
+      <div class="gate-sub">Enter the password to view</div>
+      <input class="gate-input" type="password" id="gate-input" placeholder="Password" onkeydown="if(event.key==='Enter')checkPassword()">
+      <button class="gate-btn" onclick="checkPassword()">View Quote</button>
+      <div class="gate-error" id="gate-error">Incorrect password. Please try again.</div>
+    </div>
+  </div>
+  <script>
+    function checkPassword() {
+      const val = document.getElementById('gate-input').value;
+      if (val === 'GRWNXJASON2026') {
+        document.getElementById('gate').style.display = 'none';
+        document.body.style.overflow = '';
+      } else {
+        document.getElementById('gate-error').style.display = 'block';
+        document.getElementById('gate-input').value = '';
+        document.getElementById('gate-input').focus();
+      }
+    }
+    document.body.style.overflow = 'hidden';
+  </script>
 
 <nav>
   <div class="nav-brand">💎 Packaging Quote</div>
